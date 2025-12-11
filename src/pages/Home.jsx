@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import CardProduto from '../components/CardProduto/CardProduto'; // Ajuste o caminho se necessário
+import CardProduto from '../Components/CardProduto/CardProduto'; // Ajuste o caminho se necessário
 
 function Home() {
   const [produtos, setProdutos] = useState([]);
