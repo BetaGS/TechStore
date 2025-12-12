@@ -1,0 +1,70 @@
+.home-container {
+  width: 100%;
+}
+
+.resultados-busca {
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-dark) 100%);
+  border-radius: 12px;
+  border: 2px solid var(--color-border);
+}
+
+.resultados-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.resultados-count {
+  color: var(--color-text-primary);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.termo-busca {
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.sem-resultados {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--color-text-muted);
+}
+
+.sem-resultados-icon {
+  color: var(--color-text-secondary);
+  margin-bottom: 1.5rem;
+  opacity: 0.5;
+}
+
+.sem-resultados h2 {
+  color: var(--color-text-primary);
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.sem-resultados p {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 768px) {
+  .resultados-busca {
+    padding: 0.75rem 1rem;
+  }
+
+  .resultados-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .sem-resultados {
+    padding: 3rem 1rem;
+  }
+}
+

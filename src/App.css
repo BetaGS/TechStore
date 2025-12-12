@@ -1,111 +1,93 @@
-/* Removemos o estilo padrão que travava o layout no centro */
 #root {
   width: 100%;
   margin: 0 auto;
-  /* padding: 2rem; -> Removido para a navbar encostar nas bordas */
-  /* text-align: center; -> Removido para não centralizar textos indesejados */
+  min-height: 100vh;
+  background-color: var(--color-background);
 }
 
-/* --- Estilos Gerais do App --- */
+/* Container Principal */
 .container-principal {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
+  min-height: calc(100vh - 70px);
 }
 
 .container-principal h2 {
   margin-bottom: 2rem;
-  font-size: 2rem;
-  text-align: center; /* Título centralizado fica bom */
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  text-align: center;
+  color: var(--color-text-primary);
 }
 
-/* --- O GRID MÁGICO (Responsivo) --- */
+/* Grid de Produtos - Responsivo */
 .produtos-grid {
   display: grid;
-  /* Cria colunas automáticas: Mínimo 280px, Máximo 1 fração do espaço */
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem; /* Espaço entre os cards */
-  justify-items: center; /* Centraliza o card dentro do seu espaço */
-  padding-bottom: 4rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  justify-items: stretch;
+  padding: 2rem 0;
+  width: 100%;
 }
 
-/* --- Estilos Antigos (Mantidos por segurança) --- */
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Responsividade */
+@media (max-width: 1200px) {
+  .container-principal {
+    padding: 1.5rem;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .produtos-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 768px) {
+  .container-principal {
+    padding: 1rem;
+  }
+  
+  .produtos-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    padding: 1rem 0;
   }
 }
 
-/* Classes utilitárias que você já tinha */
-.vermelho {
-  background-color: #ef4444;
-  color: white;
-}
-.verde {
-  background-color: #22c55e;
-  color: white;
+@media (max-width: 480px) {
+  .produtos-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-/* CardProduto.css */
-
-/* 1. Torna a área da imagem o contêiner de referência */
+/* Card Image Wrapper - Mantido para compatibilidade */
 .card-img-wrapper {
-  background-color: white;
+  background-color: #ffffff;
   height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  
-  /* CHAVE: Permite posicionamento absoluto dos filhos (o botão) */
-  position: relative; 
+  position: relative;
 }
 
-/* 2. Posiciona o botão de favoritar sobre a imagem */
+/* Botão Favorito - Mantido para compatibilidade */
 .btn-favorito {
-  position: absolute; /* CHAVE: Permite posicionar o botão livremente */
-  top: 10px;          /* Distância do topo (ajuste para o meio superior) */
-  right: 10px;        /* Distância da direita */
-  
-  background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
   border: none;
-  border-radius: 50%; /* Transforma o botão em um círculo */
+  border-radius: 50%;
   padding: 0.5rem;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 10; /* Garante que fique acima da imagem */
-  transition: background-color 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  transition: all 0.2s ease;
 }
 
 .btn-favorito:hover {
-  background-color: white; /* Torna o fundo sólido no hover */
+  background-color: white;
   transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
-/* Se você ainda tiver o `.card-actions`, remova as regras de layout Flexbox que aplicamos anteriormente, 
-pois o botão de favorito foi movido de lá. */
-/* .card-actions { ... } */
-/* .card-actions .btn-comprar { ... } */
-/* (Estes não serão mais necessários se você moveu o botão) */

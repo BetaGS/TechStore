@@ -1,0 +1,322 @@
+.produto-container {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  color: var(--color-text-primary);
+}
+
+.btn-voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-weight: 600;
+}
+
+.btn-voltar:hover {
+  color: var(--color-accent);
+  background-color: var(--color-surface);
+  transform: translateX(-4px);
+}
+
+.produto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-dark) 100%);
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--color-border);
+}
+
+.galeria-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.imagem-principal-wrapper {
+  width: 100%;
+  height: 450px;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 2px solid var(--color-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.imagem-principal {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.imagem-principal-wrapper:hover .imagem-principal {
+  transform: scale(1.05);
+}
+
+.thumbnails-lista {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: thin;
+}
+
+.thumb-btn {
+  width: 80px;
+  height: 80px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-color: #fff;
+  cursor: pointer;
+  padding: 4px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.thumb-btn.ativo {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(74, 102, 251, 0.2);
+}
+
+.thumb-btn:hover {
+  border-color: var(--color-primary);
+  transform: scale(1.05);
+}
+
+.thumb-btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.produto-marca {
+  text-transform: uppercase;
+  color: var(--color-accent);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.produto-titulo {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.avaliacao-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-warning);
+}
+
+.nota-texto {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.preco-box {
+  background: linear-gradient(135deg, var(--color-surface-dark) 0%, var(--color-surface) 100%);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 2px solid var(--color-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.preco-antigo {
+  text-decoration: line-through;
+  color: var(--color-text-secondary);
+  font-size: 1.1rem;
+}
+
+.preco-atual {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  color: var(--color-success);
+  display: block;
+  margin: 0.5rem 0;
+  letter-spacing: -1px;
+}
+
+.parcelamento {
+  display: block;
+  margin-top: 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+.desconto-badge {
+  background: linear-gradient(135deg, var(--color-error) 0%, #dc2626 100%);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  vertical-align: middle;
+  margin-left: 0.75rem;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+}
+
+.descricao {
+  line-height: 1.8;
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+}
+
+.btn-comprar {
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%);
+  color: var(--color-text-primary);
+  border: none;
+  padding: 1.25rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  transition: all 0.2s ease;
+  width: 100%;
+  margin-top: 1rem;
+  box-shadow: 0 4px 12px rgba(74, 102, 251, 0.3);
+}
+
+.btn-comprar:hover {
+  background: linear-gradient(135deg, var(--color-accent-hover) 0%, var(--color-primary-hover) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(74, 102, 251, 0.4);
+}
+
+.btn-comprar:active {
+  transform: translateY(0);
+}
+
+.btn-comprar:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.badges-confianca {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.badge-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem;
+  background-color: var(--color-surface-dark);
+  border-radius: 10px;
+  border: 2px solid var(--color-border);
+  transition: all 0.2s ease;
+}
+
+.badge-item:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.badge-texto strong {
+  display: block;
+  color: var(--color-text-primary);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.badge-texto span {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.loading-container,
+.erro-container {
+  text-align: center;
+  padding: 4rem;
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+}
+
+.erro-container {
+  color: var(--color-error);
+}
+
+/* Responsividade */
+@media (max-width: 968px) {
+  .produto-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+  .imagem-principal-wrapper {
+    height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .produto-container {
+    padding: 0 1rem;
+  }
+  
+  .produto-grid {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .imagem-principal-wrapper {
+    height: 300px;
+  }
+
+  .produto-titulo {
+    font-size: 1.75rem;
+  }
+  
+  .preco-box {
+    padding: 1.5rem;
+  }
+  
+  .badges-confianca {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .thumb-btn {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .preco-atual {
+    font-size: 2rem;
+  }
+}

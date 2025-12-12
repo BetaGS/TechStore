@@ -1,63 +1,90 @@
-import { useState } from 'react';
+import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import { CarrinhoProvider } from './context/CarrinhoContext';
+import { AuthProvider } from './context/AuthContext';
+import { BuscaProvider } from './context/BuscaContext';
+import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary';
+import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import Navbar from './Components/Navbar/Navbar';
-import Home from './pages/Home';
-import Carrinho from './pages/Carrinho';
-import Contato from './pages/Contato';
-import Sobre from './pages/NotFound';
-import NotFound from './pages/NotFound';
-import ProdutoDetalhe from './pages/ProdutoDetalhe';
+import LoadingSpinner from './Components/LoadingSpinner/LoadingSpinner';
 import './App.css';
 
+// Lazy loading de rotas
+const Home = lazy(() => import('./pages/Home'));
+const Carrinho = lazy(() => import('./pages/Carrinho'));
+const Contato = lazy(() => import('./pages/Contato'));
+const Sobre = lazy(() => import('./pages/Sobre'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+const ProdutoDetalhe = lazy(() => import('./pages/ProdutoDetalhe'));
+const Login = lazy(() => import('./pages/Login/Login'));
+const Register = lazy(() => import('./pages/Register/Register'));
+const Checkout = lazy(() => import('./pages/Checkout/Checkout'));
+const PagamentoSucesso = lazy(() => import('./pages/PagamentoSucesso/PagamentoSucesso'));
+const PagamentoFalha = lazy(() => import('./pages/PagamentoFalha/PagamentoFalha'));
+
 function App() {
-  // 1. Estado Global do Carrinho (Array de objetos)
-  const [carrinho, setCarrinho] = useState([]);
-
-  // 2. Função para adicionar produtos
-  const adicionarAoCarrinho = (produto) => {
-    // Cria um novo array copiando o anterior (...) + o novo produto
-    setCarrinho([...carrinho, produto]);
-    alert(`Produto ${produto.nome} adicionado!`);
-  };
-
-const removerDoCarrinho = (indexParaRemover) => {
-    const novoCarrinho = carrinho.filter((_, index) => index !== indexParaRemover);
-    setCarrinho(novoCarrinho);
-  };
-
   return (
-    <BrowserRouter>
-      {/* Navbar fica FORA das Routes para aparecer em todas as páginas */}
-      <Navbar />
-
-      <div className="container-principal">
-        <Routes>
-          {/* Caminho "/" carrega a Home */}
-          <Route
-            path="/"
-            element={<Home adicionarAoCarrinho={adicionarAoCarrinho} />}
-          />
-
-          {/* Caminho "/carrinho" carrega o Carrinho */}
-          <Route path="/carrinho" element={<Carrinho carrinho={carrinho} removerDoCarrinho={removerDoCarrinho}/>} />
-
-          <Route path="/sobre" element={<Sobre />} />
-
-          <Route path="/contato" element={<Contato />} />
-
-          {/* O :id é o segredo da rota dinâmica! */}
-          <Route
-            path="/produto/:id"
-            element={
-              <ProdutoDetalhe adicionarAoCarrinho={adicionarAoCarrinho} />
-            }
-          />
-
-          {/* Rota de erro 404 (Opcional, mas legal de mostrar) */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <AuthProvider>
+        <BuscaProvider>
+          <CarrinhoProvider>
+            <BrowserRouter>
+            <Navbar />
+            <div className="container-principal">
+              <Suspense fallback={<LoadingSpinner />}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/carrinho" element={<Carrinho />} />
+                  <Route path="/checkout" element={<Checkout />} />
+                  <Route path="/pagamento/sucesso" element={<PagamentoSucesso />} />
+                  <Route path="/pagamento/falha" element={<PagamentoFalha />} />
+                  <Route path="/sobre" element={<Sobre />} />
+                  <Route path="/contato" element={<Contato />} />
+                  <Route path="/produto/:id" element={<ProdutoDetalhe />} />
+                  {/* Exemplo de rota protegida - descomente quando necessário */}
+                  {/* <Route 
+                    path="/perfil" 
+                    element={
+                      <ProtectedRoute>
+                        <Perfil />
+                      </ProtectedRoute>
+                    } 
+                  /> */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </div>
+            <Toaster 
+              position="top-right"
+              toastOptions={{
+                duration: 3000,
+                style: {
+                  background: 'var(--color-surface)',
+                  color: 'var(--color-text-primary)',
+                  border: '2px solid var(--color-border)',
+                },
+                success: {
+                  iconTheme: {
+                    primary: 'var(--color-success)',
+                    secondary: 'var(--color-text-primary)',
+                  },
+                },
+                error: {
+                  iconTheme: {
+                    primary: 'var(--color-error)',
+                    secondary: 'var(--color-text-primary)',
+                  },
+                },
+              }}
+            />
+            </BrowserRouter>
+          </CarrinhoProvider>
+        </BuscaProvider>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 
